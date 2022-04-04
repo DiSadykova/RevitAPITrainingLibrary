@@ -47,15 +47,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FilterUtils.cs" />
     <Compile Include="PipesUtils.cs" />
     <Compile Include="SelectionUtils.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\RevitAPICreateButton\RevitAPICreateButton\RevitAPICreateButton.csproj">
-      <Project>{3ee979cb-61f5-41db-8e6e-61dd15000ca8}</Project>
-      <Name>RevitAPICreateButton</Name>
-    </ProjectReference>
+    <Compile Include="WallsUtils.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

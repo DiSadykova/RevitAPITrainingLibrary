@@ -17,7 +17,7 @@ namespace RevitAPITrainingLibrary
             UIDocument uidoc = uiapp.ActiveUIDocument;
             Document doc = uidoc.Document;
 
-            var selectedObject = uidoc.Selection.PickObject(ObjectType.Element, "Выберите элемент");
+            var selectedObject = uidoc.Selection.PickObject(ObjectType.Element, message);
             var oElement = doc.GetElement(selectedObject);
             return oElement;
         }
