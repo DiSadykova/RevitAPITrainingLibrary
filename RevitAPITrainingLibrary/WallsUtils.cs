@@ -25,5 +25,19 @@ namespace RevitAPITrainingLibrary
             }
             TaskDialog.Show("Сумма объемов всех стен в модели", sum.ToString());
         }
+
+        public static List<WallType> GetWallTypes(ExternalCommandData commandData)
+        {
+            UIApplication uiapp = commandData.Application;
+            UIDocument uidoc = uiapp.ActiveUIDocument;
+            Document doc = uidoc.Document;
+
+            List<WallType> wallTypes = new FilteredElementCollector(doc)
+                                        .OfClass(typeof(WallType))
+                                        .Cast<WallType>()
+                                        .ToList();
+            return wallTypes;
+
+        }
     }
 }

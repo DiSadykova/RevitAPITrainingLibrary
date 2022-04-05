@@ -27,9 +27,12 @@ namespace RevitAPITrainingLibrary
             UIApplication uiapp = commandData.Application;
             UIDocument uidoc = uiapp.ActiveUIDocument;
             Document doc = uidoc.Document;
+
             List<Element> elementList = new List<Element>();
             
-            var selectedObjects = uidoc.Selection.PickObjects(ObjectType.Element, message);
+            
+              var selectedObjects = uidoc.Selection.PickObjects(ObjectType.Element, message);
+            
             elementList = selectedObjects.Select(selectedObject => doc.GetElement(selectedObject)).ToList();
 
             return elementList;
