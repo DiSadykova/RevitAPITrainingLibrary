@@ -22,22 +22,33 @@ namespace RevitAPITrainingLibrary
             return oElement;
         }
 
-        public static List<Element> PickObjects(ExternalCommandData commandData, string message = "Выберите объект")
+        public static List<Wall> PickWalls(ExternalCommandData commandData, string message = "Выберите стены")
         {
             UIApplication uiapp = commandData.Application;
             UIDocument uidoc = uiapp.ActiveUIDocument;
             Document doc = uidoc.Document;
 
-            List<Element> elementList = new List<Element>();
-            
-            
-              var selectedObjects = uidoc.Selection.PickObjects(ObjectType.Element, message);
-            
-            elementList = selectedObjects.Select(selectedObject => doc.GetElement(selectedObject)).ToList();
-
-            return elementList;
-
-
+            IList<Reference> selectedElementRefList = null;
+            try
+            {
+                selectedElementRefList = uidoc.Selection.PickObjects(Autodesk.Revit.UI.Selection.ObjectType.Element, new WallFilter(), "Выберите стены по грани");
+            }
+            catch (Autodesk.Revit.Exceptions.OperationCanceledException)
+            { }
+            catch (System.NullReferenceException)
+            { }
+            if (selectedElementRefList == null)
+            return null;
+            else
+            {
+                var WallList = new List<Wall>();
+                foreach (var selectedElement in selectedElementRefList)
+                {
+                    Wall oWall = doc.GetElement(selectedElement) as Wall;
+                    WallList.Add(oWall);
+                }
+                return WallList;
+            }
         }
     }
 }

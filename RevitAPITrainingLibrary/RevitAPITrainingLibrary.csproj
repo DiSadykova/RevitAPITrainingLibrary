@@ -51,6 +51,7 @@
     <Compile Include="PipesUtils.cs" />
     <Compile Include="SelectionUtils.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WallFilter.cs" />
     <Compile Include="WallsUtils.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
