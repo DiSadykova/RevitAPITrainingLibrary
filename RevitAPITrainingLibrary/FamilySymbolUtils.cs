@@ -23,5 +23,19 @@ namespace RevitAPITrainingLibrary
 
             return familySymbols;
         }
+        public static List<FamilySymbol> GetFurneturesFamilySymbols(ExternalCommandData commandData)
+        {
+            var uiapp = commandData.Application;
+            var uidoc = uiapp.ActiveUIDocument;
+            var doc = uidoc.Document;
+
+            var familySymbols = new FilteredElementCollector(doc)
+                 .OfCategory(BuiltInCategory.OST_Furniture)
+                 .WhereElementIsElementType()
+                 .Cast<FamilySymbol>()
+                 .ToList();
+
+            return familySymbols;
+        }
     }
 }

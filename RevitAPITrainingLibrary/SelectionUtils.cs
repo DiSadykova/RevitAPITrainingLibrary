@@ -64,7 +64,7 @@ namespace RevitAPITrainingLibrary
                 {
                     pickedPoint = uidoc.Selection.PickPoint(objectSnapTypes, promtMessage);
                 }
-                catch (Autodesk.Revit.Exceptions.OperationCanceledException ex)
+                catch (Autodesk.Revit.Exceptions.OperationCanceledException)
                 {
                     break;
                 }
@@ -72,6 +72,27 @@ namespace RevitAPITrainingLibrary
             }
 
             return points;
+        }
+        public static XYZ GetPoint(ExternalCommandData commandData,
+                string promtMessage, ObjectSnapTypes objectSnapTypes)
+        {
+            UIApplication uiapp = commandData.Application;
+            UIDocument uidoc = uiapp.ActiveUIDocument;
+
+            XYZ pickedPoint = new XYZ();
+            
+                pickedPoint = null;
+                try
+                {
+                    pickedPoint = uidoc.Selection.PickPoint(objectSnapTypes, promtMessage);
+                }
+                catch (Autodesk.Revit.Exceptions.OperationCanceledException)
+                {
+                }
+                
+            
+
+            return pickedPoint;
         }
         public static List<XYZ> GetDuctPoints(ExternalCommandData commandData,
                 string promtMessage, ObjectSnapTypes objectSnapTypes)
@@ -87,7 +108,7 @@ namespace RevitAPITrainingLibrary
                 {
                     pickedPoint = uidoc.Selection.PickPoint(objectSnapTypes, promtMessage);
                 }
-                catch (Autodesk.Revit.Exceptions.OperationCanceledException ex)
+                catch (Autodesk.Revit.Exceptions.OperationCanceledException)
                 {
                     break;
                 }

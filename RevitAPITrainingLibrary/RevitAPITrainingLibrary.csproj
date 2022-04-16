@@ -48,9 +48,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DuctsUtils.cs" />
+    <Compile Include="FamilyInstanceUtils.cs" />
     <Compile Include="FamilySymbolUtils.cs" />
     <Compile Include="FilterUtils.cs" />
-    <Compile Include="FurnituresUtils.cs" />
     <Compile Include="LevelsUtils.cs" />
     <Compile Include="PipesUtils.cs" />
     <Compile Include="SelectionUtils.cs" />
