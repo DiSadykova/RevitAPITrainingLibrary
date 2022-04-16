@@ -38,7 +38,7 @@ namespace RevitAPITrainingLibrary
             catch (System.NullReferenceException)
             { }
             if (selectedElementRefList == null)
-            return null;
+                return null;
             else
             {
                 var WallList = new List<Wall>();
@@ -49,6 +49,52 @@ namespace RevitAPITrainingLibrary
                 }
                 return WallList;
             }
+        }
+        public static List<XYZ> GetPoints(ExternalCommandData commandData,
+                string promtMessage, ObjectSnapTypes objectSnapTypes)
+        {
+            UIApplication uiapp = commandData.Application;
+            UIDocument uidoc = uiapp.ActiveUIDocument;
+
+            List<XYZ> points = new List<XYZ>();
+            while (true)
+            {
+                XYZ pickedPoint = null;
+                try
+                {
+                    pickedPoint = uidoc.Selection.PickPoint(objectSnapTypes, promtMessage);
+                }
+                catch (Autodesk.Revit.Exceptions.OperationCanceledException ex)
+                {
+                    break;
+                }
+                points.Add(pickedPoint);
+            }
+
+            return points;
+        }
+        public static List<XYZ> GetDuctPoints(ExternalCommandData commandData,
+                string promtMessage, ObjectSnapTypes objectSnapTypes)
+        {
+            UIApplication uiapp = commandData.Application;
+            UIDocument uidoc = uiapp.ActiveUIDocument;
+
+            List<XYZ> points = new List<XYZ>();
+            while (points.Count < 2)
+            {
+                XYZ pickedPoint = null;
+                try
+                {
+                    pickedPoint = uidoc.Selection.PickPoint(objectSnapTypes, promtMessage);
+                }
+                catch (Autodesk.Revit.Exceptions.OperationCanceledException ex)
+                {
+                    break;
+                }
+                points.Add(pickedPoint);
+            }
+
+            return points;
         }
     }
 }
