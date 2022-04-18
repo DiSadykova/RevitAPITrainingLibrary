@@ -9,17 +9,38 @@ namespace RevitAPITrainingLibrary
 {
     public class ViewsUtils
     {
-        public static List<ViewPlan> GetViews(Document doc)
+        public static List<View> GetViews(Document doc)
         {
 
+            var views = new List<View>();
 
-            var views = new FilteredElementCollector(doc)
+            var viewPlans = new FilteredElementCollector(doc)
                 .OfClass(typeof(ViewPlan))
-                .WhereElementIsNotElementType()
-                .Cast<ViewPlan>()
+                .Cast<View>()
+                .Where(x=>x.IsTemplate==false)
                 .ToList();
 
+            views.AddRange(viewPlans);
+
+            var viewSections = new FilteredElementCollector(doc)
+                .OfClass(typeof(ViewSection))
+                .Cast<View>()
+                .Where(x => x.IsTemplate == false)
+                .ToList();
+
+            views.AddRange(viewSections);
+
             return views;
+        }
+
+        public static List<Viewport> GetViewports(Document doc)
+        {
+            var viewports = new FilteredElementCollector(doc)
+                .OfClass(typeof(Viewport))
+                .Cast<Viewport>()
+                .ToList();
+
+            return viewports;
         }
     }
 }
